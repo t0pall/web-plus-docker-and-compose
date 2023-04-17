@@ -7,9 +7,9 @@ RUN npm run build
 
 FROM node:16-alpine AS production
 WORKDIR /app
-COPY package*.json .
+COPY package*.json ./
 RUN npm ci --omit=dev
-COPY ecosystem.config.js .
+COPY ecosystem.config.js ./
 COPY --from=builder /app/dist/ /app/dist/
 RUN npm install pm2 -g
 EXPOSE 3000
